@@ -1,0 +1,13 @@
+import SignIn from "../../components/signIn/SignIn";
+
+export interface SignInPageProps {}
+
+const SignInPage: React.FC<SignInPageProps> = () => {
+  return (
+    <>
+      <SignIn />
+    </>
+  );
+};
+
+export default SignInPage;

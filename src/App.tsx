@@ -1,6 +1,6 @@
-interface AppProps {}
+export interface AppProps {}
 
-const App: React.FC<AppProps> = ({}) => {
+const App: React.FC<AppProps> = () => {
   return (
     <div className="App">
       <h1>title</h1>
