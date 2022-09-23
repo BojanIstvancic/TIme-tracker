@@ -4,6 +4,7 @@ import {
   Route,
   BrowserRouter as Router,
 } from "react-router-dom";
+import error404 from "./components/errors/404";
 
 import SettingsPage from "./containers/SettingsPage";
 import SignInPage from "./containers/SignInPage";
@@ -20,6 +21,7 @@ const PublicRoutes = () => {
           <Route exact path="/tracker/sign-up" component={SignUpPage} />
           <Route exact path="/tracker/settings" component={SettingsPage} />
           <Route exact path="/tracker" component={TrackerPage} />
+          <Route component={error404} />
         </Switch>
       </Router>
     </>
