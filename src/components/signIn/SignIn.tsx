@@ -39,7 +39,7 @@ const SignIn: React.FC<SignInProps> = () => {
         />
         <br />
         <input type="submit" value="Sign In" /> <br />
-        Need an account?: <Link to="/tracker/sign-up">Sign Up</Link>
+        Need an account?: <Link to="/sign-up">Sign Up</Link>
       </form>
     </>
   );
