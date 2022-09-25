@@ -1,41 +1,23 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export interface SignUpProps {}
 
 const SignUp: React.FC<SignUpProps> = () => {
-  const [firstName, setFirstName] = useState("First Name");
-  const [lastName, setLastName] = useState("Last Name");
   const [email, setEmail] = useState("emai@email.com");
   const [password, setPassword] = useState("123");
 
+  const auth = useContext(AuthContext);
+  const { signUp } = auth;
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
-    console.log(password);
+    signUp(email, password);
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label>First name:</label>
-        <input
-          type="text"
-          name="firstName"
-          value={firstName}
-          required
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <br />
-        <label>Last name:</label>
-        <input
-          type="text"
-          name="lastName"
-          value={lastName}
-          required
-          onChange={(e) => setLastName(e.target.value)}
-        />
         <br />
         <label>Email:</label>
         <input

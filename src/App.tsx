@@ -1,3 +1,4 @@
+import { AuthProvider } from "./contexts/AuthContext";
 import PublicRoutes from "./router";
 
 export interface AppProps {}
@@ -5,7 +6,9 @@ export interface AppProps {}
 const App: React.FC<AppProps> = () => {
   return (
     <div className="App">
-      <PublicRoutes />
+      <AuthProvider>
+        <PublicRoutes />
+      </AuthProvider>
     </div>
   );
 };

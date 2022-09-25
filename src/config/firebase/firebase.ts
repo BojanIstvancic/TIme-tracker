@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { auth } from "firebase";
-import "firebase/auth";
+import { getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
@@ -9,10 +9,9 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
 
-export const firebaseAppAuth = auth();
-export default firebaseApp;
+export const firebaseAppAuth = getAuth(firebaseApp);
+export const createUser = createUserWithEmailAndPassword;
