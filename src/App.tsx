@@ -1,3 +1,4 @@
+import GlobalStyle from "./config/style/style";
 import { AuthProvider } from "./contexts/AuthContext";
 import PublicRoutes from "./router";
 
@@ -5,11 +6,12 @@ export interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
   return (
-    <div className="App">
+    <>
+      <GlobalStyle />
       <AuthProvider>
         <PublicRoutes />
       </AuthProvider>
-    </div>
+    </>
   );
 };
 

@@ -20,7 +20,6 @@ const SignIn: React.FC<SignInProps> = () => {
   return (
     <SignInStyleWrapper>
       <form onSubmit={handleSubmit}>
-        <br />
         <label>Email:</label>
         <input
           type="email"
