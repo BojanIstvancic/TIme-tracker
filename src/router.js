@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   Redirect,
   Switch,
@@ -9,6 +10,19 @@ import SignIn from "./components/signIn/SignIn";
 import SignUp from "./components/signUp/SignUp";
 
 import Tracker from "./containers/Tracker/Tracker";
+import { AuthContext } from "./contexts/AuthContext";
+
+const ProtectedRoute = ({
+  component: Component,
+  isLogedIn = false,
+  ...rest
+}) => {
+  if (isLogedIn) {
+    return <Route {...rest} render={(props) => <Component {...props} />} />;
+  } else {
+    return <Route {...rest} render={() => <Redirect to="/sign-in" />} />;
+  }
+};
 
 const PublicRoutes = () => {
   return (
@@ -18,7 +32,11 @@ const PublicRoutes = () => {
           <Route exact path="/" render={() => <Redirect to="/sign-in" />} />
           <Route exact path="/sign-in" component={SignIn} />
           <Route exact path="/sign-up" component={SignUp} />
-          <Route exact path="/tracker(|/settings)" component={Tracker} />
+          <ProtectedRoute
+            exact
+            path="/tracker(|/settings)"
+            component={Tracker}
+          />
           <Route component={error404} />
         </Switch>
       </Router>
