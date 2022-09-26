@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const SignInStyledWrapper = styled.div`
+const SignUpStyledWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@ const SignInStyledWrapper = styled.div`
       width: 100%;
 
       &.submit {
-        margin: 15px auto;
+        margin: 15px auto 0;
         width: 150px;
         background: var(--blue);
         color: var(--white);
@@ -54,4 +54,4 @@ const SignInStyledWrapper = styled.div`
   }
 `;
 
-export { SignInStyledWrapper };
+export { SignUpStyledWrapper };

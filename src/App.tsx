@@ -1,3 +1,4 @@
+import { LayoutWrapper } from "./components/layout/layoutStyled";
 import GlobalStyle from "./config/style/style";
 import { AuthProvider } from "./contexts/AuthContext";
 import PublicRoutes from "./router";
@@ -9,7 +10,9 @@ const App: React.FC<AppProps> = () => {
     <>
       <GlobalStyle />
       <AuthProvider>
-        <PublicRoutes />
+        <LayoutWrapper>
+          <PublicRoutes />
+        </LayoutWrapper>
       </AuthProvider>
     </>
   );

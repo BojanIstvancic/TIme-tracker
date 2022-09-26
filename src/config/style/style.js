@@ -25,7 +25,17 @@ const GlobalStyle = createGlobalStyle`
 html {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--dark-gray);
-  min-height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: var(--blue);
+
+  transition: all 500ms ease;
+
+  &:hover {
+    color: var(--dark-blue);
+  }
 }
 `;
 

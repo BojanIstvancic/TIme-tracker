@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
-import { SignInStyleWrapper } from "./signIn.style";
+import { SignInStyledWrapper } from "./signIn.style";
 
 export interface SignInProps {}
 
@@ -18,30 +18,37 @@ const SignIn: React.FC<SignInProps> = () => {
   };
 
   return (
-    <SignInStyleWrapper>
+    <SignInStyledWrapper>
+      <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          required
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <input type="submit" value="Sign In" /> <br />
-        Need an account?: <Link to="/sign-up">Sign Up</Link>
+        <div>
+          <p>Email:</p>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <p>Password:</p>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div>
+          <input type="submit" value="Sign In" className="submit" />
+        </div>
+        <div>
+          <p>Need an account?</p> <Link to="/sign-up">Sign Up</Link>
+        </div>
       </form>
-    </SignInStyleWrapper>
+    </SignInStyledWrapper>
   );
 };
 

@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import { SignUpStyledWrapper } from "./signup.style";
 
 export interface SignUpProps {}
 
@@ -16,30 +17,34 @@ const SignUp: React.FC<SignUpProps> = () => {
   };
 
   return (
-    <>
+    <SignUpStyledWrapper>
+      <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
-        <br />
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          required
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <input type="submit" value="Sign Up" />
+        <div>
+          <p>Email:</p>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <p>Password:</p>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div>
+          <input type="submit" value="Sign Up" className="submit" />
+        </div>
       </form>
-    </>
+    </SignUpStyledWrapper>
   );
 };
 
