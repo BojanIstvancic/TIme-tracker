@@ -13,8 +13,10 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 
-export const firebaseAppAuth = getAuth(firebaseApp);
-export const createUser = createUserWithEmailAndPassword;
-export const signInUser = signInWithEmailAndPassword;
-export const signOutUser = signOut;
-export const authChange = onAuthStateChanged;
+const firebaseAppAuth = getAuth(firebaseApp);
+const createUser = createUserWithEmailAndPassword;
+const signInUser = signInWithEmailAndPassword;
+const signOutUser = signOut;
+const authChange = onAuthStateChanged;
+
+export { firebaseAppAuth, createUser, signInUser, signOutUser, authChange };

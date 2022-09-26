@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { SignInStyleWrapper } from "./signIn.style";
 
 export interface SignInProps {}
 
@@ -17,7 +18,7 @@ const SignIn: React.FC<SignInProps> = () => {
   };
 
   return (
-    <>
+    <SignInStyleWrapper>
       <form onSubmit={handleSubmit}>
         <br />
         <label>Email:</label>
@@ -41,7 +42,7 @@ const SignIn: React.FC<SignInProps> = () => {
         <input type="submit" value="Sign In" /> <br />
         Need an account?: <Link to="/sign-up">Sign Up</Link>
       </form>
-    </>
+    </SignInStyleWrapper>
   );
 };
 
