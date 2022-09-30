@@ -1,11 +1,9 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { SignInStyledWrapper } from "./signIn.style";
 
-export interface SignInProps {}
-
-const SignIn: React.FC<SignInProps> = () => {
+const SignIn: React.FC<RouteComponentProps> = () => {
   const [email, setEmail] = useState("emai@email.com");
   const [password, setPassword] = useState("123");
 

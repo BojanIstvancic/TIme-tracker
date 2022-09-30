@@ -1,6 +1,5 @@
-export interface error404Props {}
-
-const error404: React.FC<error404Props> = ({}) => {
+import { RouteComponentProps } from "react-router-dom";
+const error404: React.FC<RouteComponentProps> = () => {
   return (
     <>
       <p>error 404</p>

@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import {
   Redirect,
   Switch,
@@ -10,7 +9,6 @@ import SignIn from "./components/signIn/SignIn";
 import SignUp from "./components/signUp/SignUp";
 
 import Tracker from "./containers/Tracker/Tracker";
-import { AuthContext } from "./contexts/AuthContext";
 
 const ProtectedRoute = ({
   component: Component,
