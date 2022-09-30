@@ -1,51 +1,20 @@
-import { useContext, useState } from "react";
-import { Link, RouteComponentProps } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import { blue } from "@mui/material/colors";
+import { RouteComponentProps } from "react-router-dom";
+import Form from "../form/Form";
 import { SignInStyledWrapper } from "./signIn.style";
+import { Typography } from "@mui/material";
 
-const SignIn: React.FC<RouteComponentProps> = () => {
-  const [email, setEmail] = useState("emai@email.com");
-  const [password, setPassword] = useState("123");
-
-  const auth = useContext(AuthContext);
-  const { signIn } = auth;
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    signIn(email, password);
-  };
-
+const SignIn: React.FC<RouteComponentProps> = ({ history }) => {
   return (
     <SignInStyledWrapper>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <p>Email:</p>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <p>Password:</p>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <input type="submit" value="Sign In" className="submit" />
-        </div>
-        <div>
-          <p>Need an account?</p> <Link to="/sign-up">Sign Up</Link>
-        </div>
-      </form>
+      <Typography
+        variant="h4"
+        component="div"
+        sx={{ mt: 5, mb: 5, color: blue[900] }}
+      >
+        Sign In
+      </Typography>
+      <Form history={history} />
     </SignInStyledWrapper>
   );
 };
