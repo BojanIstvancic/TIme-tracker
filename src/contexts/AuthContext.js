@@ -15,9 +15,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const user = await createUser(firebaseAppAuth, email, password);
       setCurrentUser(user.user);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const signIn = async (email, password) => {

@@ -41,7 +41,10 @@ const Form: React.FC<FormProps> = ({ history }) => {
   const { pathname } = history.location;
   return (
     <Container>
-      <Box sx={{ width: 1, maxWidth: "500px", margin: "0 auto" }}>
+      <Box
+        sx={{ width: 1, maxWidth: "500px", margin: "0 auto" }}
+        component="form"
+      >
         <Box sx={{ mb: 5 }}>
           <TextField
             id="outlined-multiline-flexible"
