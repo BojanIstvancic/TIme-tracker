@@ -28,13 +28,13 @@ export const signIn = createAsyncThunk(
 
 export interface AuthenticationState {
   user: null | object;
-  isAuthenticated: boolean;
+  isLogedIn: boolean;
   isLoading: boolean;
 }
 
 const initialState: AuthenticationState = {
   user: null,
-  isAuthenticated: false,
+  isLogedIn: false,
   isLoading: false,
 };
 
@@ -61,7 +61,7 @@ export const authenticationSlice = createSlice({
         id: action.payload.uid,
         email: action.payload.email,
       };
-      state.isAuthenticated = true;
+      state.isLogedIn = true;
       state.isLoading = false;
     });
     builder.addCase(signUp.rejected, (state) => {
@@ -72,12 +72,11 @@ export const authenticationSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(signIn.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.user = {
         id: action.payload.uid,
         email: action.payload.email,
       };
-      state.isAuthenticated = true;
+      state.isLogedIn = true;
       state.isLoading = false;
     });
     builder.addCase(signIn.rejected, (state) => {

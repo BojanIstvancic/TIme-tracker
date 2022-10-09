@@ -48,7 +48,7 @@ const Form: React.FC<FormProps> = ({ history }) => {
       >
         <Box sx={{ mb: 5 }}>
           <TextField
-            id="outlined-multiline-flexible"
+            id="outlined-multiline-flexible-1"
             label="Email"
             name="email"
             fullWidth
@@ -64,7 +64,7 @@ const Form: React.FC<FormProps> = ({ history }) => {
         </Box>
         <Box sx={{ mb: 5 }}>
           <TextField
-            id="outlined-multiline-flexible"
+            id="outlined-multiline-flexible-2"
             label="Password"
             name="password"
             type={"password"}

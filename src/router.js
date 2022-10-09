@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import {
   Redirect,
   Switch,
@@ -22,18 +23,38 @@ const ProtectedRoute = ({
   }
 };
 
+const AuthRoute = ({ component: Component, isLogedIn = false, ...rest }) => {
+  if (!isLogedIn) {
+    return <Route {...rest} render={(props) => <Component {...props} />} />;
+  } else {
+    return <Route {...rest} render={() => <Redirect to="/tracker" />} />;
+  }
+};
+
 const PublicRoutes = () => {
+  const { isLogedIn } = useSelector((state) => state.authentication);
   return (
     <>
       <Router>
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/sign-in" />} />
-          <Route exact path="/sign-in" component={SignIn} />
-          <Route exact path="/sign-up" component={SignUp} />
+          <AuthRoute
+            exact
+            path="/sign-in"
+            component={SignIn}
+            isLogedIn={isLogedIn}
+          />
+          <AuthRoute
+            exact
+            path="/sign-up"
+            component={SignUp}
+            isLogedIn={isLogedIn}
+          />
           <ProtectedRoute
             exact
             path="/tracker(|/settings)"
             component={Tracker}
+            isLogedIn={isLogedIn}
           />
           <Route component={error404} />
         </Switch>
