@@ -10,6 +10,7 @@ import SignIn from "./components/signIn/SignIn";
 import SignUp from "./components/signUp/SignUp";
 
 import Tracker from "./containers/Tracker/Tracker";
+import links from "./helpers/links";
 
 const ProtectedRoute = ({
   component: Component,
@@ -19,7 +20,9 @@ const ProtectedRoute = ({
   if (isLogedIn) {
     return <Route {...rest} render={(props) => <Component {...props} />} />;
   } else {
-    return <Route {...rest} render={() => <Redirect to="/sign-in" />} />;
+    return (
+      <Route {...rest} render={() => <Redirect to={links.signIn.pattern} />} />
+    );
   }
 };
 
@@ -27,7 +30,9 @@ const AuthRoute = ({ component: Component, isLogedIn = false, ...rest }) => {
   if (!isLogedIn) {
     return <Route {...rest} render={(props) => <Component {...props} />} />;
   } else {
-    return <Route {...rest} render={() => <Redirect to="/tracker" />} />;
+    return (
+      <Route {...rest} render={() => <Redirect to={links.tracker.pattern} />} />
+    );
   }
 };
 
@@ -37,16 +42,20 @@ const PublicRoutes = () => {
     <>
       <Router>
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/sign-in" />} />
+          <Route
+            exact
+            path="/"
+            render={() => <Redirect to={links.signIn.pattern} />}
+          />
           <AuthRoute
             exact
-            path="/sign-in"
+            path={links.signIn.pattern}
             component={SignIn}
             isLogedIn={isLogedIn}
           />
           <AuthRoute
             exact
-            path="/sign-up"
+            path={links.signUp.pattern}
             component={SignUp}
             isLogedIn={isLogedIn}
           />
