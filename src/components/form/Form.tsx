@@ -1,10 +1,12 @@
 import { Container, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useContext, useState } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useState } from "react";
 import { History } from "history";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signUp, signIn } from "../../redux/authenticationSlice";
+import { AppDispatch } from "../../redux/store";
 
 export interface FormProps {
   history: History;
@@ -16,22 +18,21 @@ export interface User {
 }
 
 const Form: React.FC<FormProps> = ({ history }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const [user, setUser] = useState<User>({
     email: "Add email address",
     password: "Add password",
   });
 
-  const auth = useContext(AuthContext);
-  const { signUp, signIn } = auth;
-
-  const handleSignUp = (e: any) => {
-    e.preventDefault();
-    signUp(user.email, user.password);
+  const handleSignUp = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    dispatch(signUp({ email: user.email, password: user.password }));
   };
 
-  const handleSignIn = (e: any) => {
-    e.preventDefault();
-    signIn(user.email, user.password);
+  const handleSignIn = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    dispatch(signIn({ email: user.email, password: user.password }));
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

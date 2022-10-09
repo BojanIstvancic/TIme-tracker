@@ -1,6 +1,5 @@
 import { LayoutWrapper } from "./components/layout/layoutStyled";
 import GlobalStyle from "./config/style/style";
-import { AuthProvider } from "./contexts/AuthContext";
 import PublicRoutes from "./router";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -12,11 +11,9 @@ const App: React.FC<AppProps> = () => {
     <>
       <GlobalStyle />
       <Provider store={store}>
-        <AuthProvider>
-          <LayoutWrapper>
-            <PublicRoutes />
-          </LayoutWrapper>
-        </AuthProvider>
+        <LayoutWrapper>
+          <PublicRoutes />
+        </LayoutWrapper>
       </Provider>
     </>
   );
