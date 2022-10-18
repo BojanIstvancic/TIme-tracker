@@ -4,6 +4,7 @@ import {
   createUser,
   firebaseAppAuth,
   signInUser,
+  signOutUser,
 } from "../config/firebase/firebase";
 
 export const signUp = createAsyncThunk(
@@ -22,9 +23,9 @@ export const signIn = createAsyncThunk(
   }
 );
 
-// const signOut = async () => {
-//   await signOutUser(firebaseAppAuth);
-// };
+export const signOut = createAsyncThunk("authentication/signOut", async () => {
+  await signOutUser(firebaseAppAuth);
+});
 
 export interface AuthenticationState {
   user: null | object;
@@ -80,6 +81,17 @@ export const authenticationSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(signIn.rejected, (state) => {
+      state.isLoading = false;
+    });
+
+    builder.addCase(signOut.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(signOut.fulfilled, (state) => {
+      state.isLogedIn = false;
+      state.isLoading = false;
+    });
+    builder.addCase(signOut.rejected, (state) => {
       state.isLoading = false;
     });
   },
