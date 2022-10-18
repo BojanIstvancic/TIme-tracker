@@ -1,4 +1,4 @@
-import { withRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import SettingsPage from "../SettingsPage";
 import TrackerPage from "../TrackerPage";
 
@@ -13,4 +13,4 @@ const TrackerRouter: React.FC<TrackerRouterProps> = () => {
   );
 };
 
-export default withRouter(TrackerRouter);
+export default TrackerRouter;
