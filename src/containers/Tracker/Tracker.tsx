@@ -1,16 +1,21 @@
-import { withRouter, Switch, Route } from "react-router-dom";
-import SettingsPage from "../SettingsPage";
-import TrackerPage from "../TrackerPage";
+import { Drawer } from "@mui/material";
+import { Box } from "@mui/system";
+import TrackerRouter from "./TrackerRouter";
 
 export interface TrackerProps {}
 
 const Tracker: React.FC<TrackerProps> = () => {
   return (
-    <Switch>
-      <Route exact path="/tracker" component={TrackerPage} />
-      <Route exact path="/tracker/settings" component={SettingsPage} />
-    </Switch>
+    <Box sx={{ display: "flex" }}>
+      <Drawer variant="permanent" anchor="left">
+        <li>list item</li>
+        <li>list item2</li>
+      </Drawer>
+      <Box>
+        <TrackerRouter />
+      </Box>
+    </Box>
   );
 };
 
-export default withRouter(Tracker);
+export default Tracker;
