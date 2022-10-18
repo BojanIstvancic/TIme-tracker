@@ -3,6 +3,10 @@ const links = {
     url: `/tracker`,
     pattern: `/tracker`,
   },
+  settings: {
+    url: `/tracker/settings`,
+    pattern: `/tracker/settings`,
+  },
   signIn: {
     url: `/sign-in`,
     pattern: `/sign-in`,

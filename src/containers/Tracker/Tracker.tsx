@@ -1,16 +1,14 @@
-import { withRouter, Switch, Route } from "react-router-dom";
-import SettingsPage from "../SettingsPage";
-import TrackerPage from "../TrackerPage";
+import MainLayout from "../../components/mainLayout/MainLayout";
+import TrackerRouter from "./TrackerRouter";
 
 export interface TrackerProps {}
 
 const Tracker: React.FC<TrackerProps> = () => {
   return (
-    <Switch>
-      <Route exact path="/tracker" component={TrackerPage} />
-      <Route exact path="/tracker/settings" component={SettingsPage} />
-    </Switch>
+    <MainLayout>
+      <TrackerRouter />
+    </MainLayout>
   );
 };
 
-export default withRouter(Tracker);
+export default Tracker;
