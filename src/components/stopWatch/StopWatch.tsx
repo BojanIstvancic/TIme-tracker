@@ -3,22 +3,23 @@ import { IconButton, TextField, Typography } from "@mui/material";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 export interface StopWatchProps {}
 
 export interface Item {
-  id: number;
   title: string;
-  userId: number;
+  userId: string | null;
 }
 
 const StopWatch: React.FC<StopWatchProps> = () => {
+  const { user } = useSelector((state: RootState) => state.authentication);
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   const [item, setItem] = useState<Item>({
-    id: 1,
     title: "Add title here",
-    userId: 1,
+    userId: user.id,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,6 +39,8 @@ const StopWatch: React.FC<StopWatchProps> = () => {
 
   const saveData = () => {
     setTime(0);
+    const data = { ...item, time };
+    // add item to database
   };
   return (
     <Box

@@ -9,7 +9,7 @@ const MainLayout: React.FunctionComponent<MainLayoutProps> = ({ children }) => {
   return (
     <>
       <SideBar />
-      <Box sx={{ marginLeft: "200px" }}>{children}</Box>
+      <Box sx={{ marginLeft: "200px", minHeight: "100%" }}>{children}</Box>
     </>
   );
 };

@@ -58,7 +58,7 @@ const Projects: React.FC<ProjectsProps> = () => {
             </Typography>
           </Box>
           {data && data.length > 0 ? (
-            data.map((item, index) => (
+            data.map((item: any, index: any) => (
               <Box
                 sx={{
                   display: "flex",

@@ -4,7 +4,7 @@ import { dataBase } from "../config/firebase/firebase";
 // import type { PayloadAction } from "@reduxjs/toolkit";
 
 export const getTrackerData = createAsyncThunk(
-  "tracketData/getData",
+  "trackedData/getData",
   async ({ userId }: { userId: string }) => {
     const trackedDataRef = collection(dataBase, "trackedData");
 
