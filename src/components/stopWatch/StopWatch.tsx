@@ -12,7 +12,6 @@ export interface StopWatchProps {}
 export interface Item {
   title: string;
   userId: string;
-  time: number;
 }
 
 const StopWatch: React.FC<StopWatchProps> = () => {
@@ -23,7 +22,6 @@ const StopWatch: React.FC<StopWatchProps> = () => {
   const [item, setItem] = useState<Item>({
     title: "Add title here",
     userId: user.id,
-    time,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +45,7 @@ const StopWatch: React.FC<StopWatchProps> = () => {
       addTrackedDataItem({
         title: item.title,
         userId: item.userId,
-        time: item.time,
+        time,
       })
     );
     setTime(0);
