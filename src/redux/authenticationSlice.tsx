@@ -28,8 +28,8 @@ export const signOut = createAsyncThunk("authentication/signOut", async () => {
 });
 
 export interface User {
-  id: string | null;
-  email: string | null;
+  id: string;
+  email: any;
 }
 export interface AuthenticationState {
   user: User;
@@ -39,8 +39,8 @@ export interface AuthenticationState {
 
 const initialState: AuthenticationState = {
   user: {
-    id: null,
-    email: null,
+    id: "",
+    email: "",
   },
   isLogedIn: false,
   isLoading: false,

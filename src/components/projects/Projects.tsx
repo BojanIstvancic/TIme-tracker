@@ -2,7 +2,7 @@ import { Box } from "@mui/system";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { getTrackerData } from "../../redux/tracketDataSlice";
+import { getTrackerData } from "../../redux/trackedDataSlice";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Typography } from "@mui/material";
 
@@ -17,7 +17,7 @@ export interface Item {
 const Projects: React.FC<ProjectsProps> = () => {
   const { user } = useSelector((state: RootState) => state.authentication);
   const { data, isLoading } = useSelector(
-    (state: RootState) => state.trackerData
+    (state: RootState) => state.trackedData
   );
   const dispatch = useDispatch<AppDispatch>();
 
@@ -58,7 +58,7 @@ const Projects: React.FC<ProjectsProps> = () => {
             </Typography>
           </Box>
           {data && data.length > 0 ? (
-            data.map((item, index) => (
+            data.map((item: any, index: any) => (
               <Box
                 sx={{
                   display: "flex",

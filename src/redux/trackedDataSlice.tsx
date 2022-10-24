@@ -1,21 +1,39 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { dataBase } from "../config/firebase/firebase";
 // import type { PayloadAction } from "@reduxjs/toolkit";
 
 export const getTrackerData = createAsyncThunk(
-  "tracketData/getData",
+  "trackedData/getData",
   async ({ userId }: { userId: string }) => {
     const trackedDataRef = collection(dataBase, "trackedData");
 
     const trackedData = await getDocs(trackedDataRef);
 
-    const data = trackedData.docs
+    return trackedData.docs
       .map((doc: any) => ({
         ...doc.data(),
       }))
       .filter((doc: any) => userId === doc.userId);
-    return data;
+  }
+);
+
+export const addTrackedDataItem = createAsyncThunk(
+  "trackedData/addItem",
+  async ({
+    title,
+    userId,
+    time,
+  }: {
+    title: string;
+    userId: string;
+    time: number;
+  }) => {
+    const trackedDataRef = collection(dataBase, "trackedData");
+
+    await addDoc(trackedDataRef, { title, userId, time });
+
+    return { time, title, userId };
   }
 );
 
@@ -48,6 +66,17 @@ export const trackedDataSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(getTrackerData.rejected, (state) => {
+      state.isLoading = false;
+    });
+
+    builder.addCase(addTrackedDataItem.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(addTrackedDataItem.fulfilled, (state, action) => {
+      state.data?.push(action.payload);
+      state.isLoading = false;
+    });
+    builder.addCase(addTrackedDataItem.rejected, (state) => {
       state.isLoading = false;
     });
   },
