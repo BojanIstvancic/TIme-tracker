@@ -3,28 +3,33 @@ import { IconButton, TextField, Typography } from "@mui/material";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { addTrackedDataItem } from "../../redux/trackedDataSlice";
 
 export interface StopWatchProps {}
 
 export interface Item {
   title: string;
-  userId: string | null;
+  userId: string;
+  time: number;
 }
 
 const StopWatch: React.FC<StopWatchProps> = () => {
   const { user } = useSelector((state: RootState) => state.authentication);
+  const dispatch = useDispatch<AppDispatch>();
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   const [item, setItem] = useState<Item>({
     title: "Add title here",
     userId: user.id,
+    time,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setItem({ ...item, [event.target.name]: event.target.value });
   };
+
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | undefined;
     if (running) {
@@ -38,9 +43,14 @@ const StopWatch: React.FC<StopWatchProps> = () => {
   }, [running]);
 
   const saveData = () => {
+    dispatch(
+      addTrackedDataItem({
+        title: item.title,
+        userId: item.userId,
+        time: item.time,
+      })
+    );
     setTime(0);
-    const data = { ...item, time };
-    // add item to database
   };
   return (
     <Box
