@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
@@ -18,5 +19,6 @@ const createUser = createUserWithEmailAndPassword;
 const signInUser = signInWithEmailAndPassword;
 const signOutUser = signOut;
 const authChange = onAuthStateChanged;
+const dataBase = getFirestore(firebaseApp)
 
-export { firebaseAppAuth, createUser, signInUser, signOutUser, authChange };
+export { firebaseAppAuth, createUser, signInUser, signOutUser, authChange, dataBase };

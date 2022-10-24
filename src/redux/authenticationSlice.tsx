@@ -27,14 +27,21 @@ export const signOut = createAsyncThunk("authentication/signOut", async () => {
   await signOutUser(firebaseAppAuth);
 });
 
+export interface User {
+  id: string | null;
+  email: string | null;
+}
 export interface AuthenticationState {
-  user: null | object;
+  user: User;
   isLogedIn: boolean;
   isLoading: boolean;
 }
 
 const initialState: AuthenticationState = {
-  user: null,
+  user: {
+    id: null,
+    email: null,
+  },
   isLogedIn: false,
   isLoading: false,
 };

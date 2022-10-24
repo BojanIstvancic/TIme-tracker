@@ -10,7 +10,6 @@ export interface Item {
   id: number;
   title: string;
   userId: number;
-  totalTime: string | null;
 }
 
 const StopWatch: React.FC<StopWatchProps> = () => {
@@ -20,14 +19,13 @@ const StopWatch: React.FC<StopWatchProps> = () => {
     id: 1,
     title: "Add title here",
     userId: 1,
-    totalTime: null,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setItem({ ...item, [event.target.name]: event.target.value });
   };
   useEffect(() => {
-    let interval: any;
+    let interval: ReturnType<typeof setInterval> | undefined;
     if (running) {
       interval = setInterval(() => {
         setTime((prevTime) => prevTime + 10);
@@ -38,6 +36,9 @@ const StopWatch: React.FC<StopWatchProps> = () => {
     return () => clearInterval(interval);
   }, [running]);
 
+  const saveData = () => {
+    setTime(0);
+  };
   return (
     <Box
       sx={{
@@ -80,7 +81,10 @@ const StopWatch: React.FC<StopWatchProps> = () => {
           edge="start"
           color="inherit"
           aria-label="menu"
-          onClick={() => setRunning(false)}
+          onClick={() => {
+            setRunning(false);
+            saveData();
+          }}
         >
           <StopCircleIcon fontSize="large" />
         </IconButton>

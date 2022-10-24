@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import authenticationReducer from './authenticationSlice';
+import trackerDataReducer from './tracketDataSlice';
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -10,7 +11,8 @@ const persistConfig = {
 }
 
 const reducer = combineReducers({
-    authentication: authenticationReducer 
+    authentication: authenticationReducer,
+    trackerData: trackerDataReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, reducer)
