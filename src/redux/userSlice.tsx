@@ -4,18 +4,18 @@ import { dataBase } from "../config/firebase/firebase";
 
 export const createUserInDatabase = createAsyncThunk(
   "user/createUserInDatabase",
-  async ({ userId }: { userId: string }) => {
+  async ({ id }: { id: string }) => {
     const usersDataRef = collection(dataBase, "users");
 
-    await addDoc(usersDataRef, { name: "", surname: "", userId });
+    await addDoc(usersDataRef, { name: "", surname: "", id });
 
-    return { userId };
+    return { id };
   }
 );
 
 export const getUserFromDatabase = createAsyncThunk(
   "user/getUserFromDatabase",
-  async ({ userId }: { userId: string }) => {
+  async ({ id }: { id: string }) => {
     const usersDataRef = collection(dataBase, "users");
 
     const userData = await getDocs(usersDataRef);
@@ -24,14 +24,14 @@ export const getUserFromDatabase = createAsyncThunk(
       .map((doc: any) => ({
         ...doc.data(),
       }))
-      .find((doc: any) => userId === doc.userId);
+      .find((doc: any) => id === doc.id);
   }
 );
 
 export interface User {
+  id: string;
   name: string;
   surname: string;
-  userId: string;
 }
 export interface AuthenticationState {
   user: User;
@@ -40,9 +40,9 @@ export interface AuthenticationState {
 
 const initialState: AuthenticationState = {
   user: {
+    id: "",
     name: "",
     surname: "",
-    userId: "",
   },
   isLoading: false,
 };
@@ -56,11 +56,7 @@ export const userSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(createUserInDatabase.fulfilled, (state, action) => {
-      state.user = {
-        userId: action.payload.userId,
-        name: "",
-        surname: "",
-      };
+      state.user = { ...state.user, id: action.payload.id };
       state.isLoading = false;
     });
     builder.addCase(createUserInDatabase.rejected, (state) => {
@@ -72,7 +68,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(getUserFromDatabase.fulfilled, (state, action) => {
       state.user = {
-        userId: action.payload.userId,
+        id: action.payload.id,
         name: action.payload.name,
         surname: action.payload.surname,
       };

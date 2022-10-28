@@ -26,7 +26,7 @@ listenerMiddleware.startListening({
   matcher: isAnyOf(signUp.fulfilled),
   effect: (action, listenerApi) => {
 
-   listenerApi.dispatch(createUserInDatabase({ userId: action.payload.uid}))
+   listenerApi.dispatch(createUserInDatabase({ id: action.payload.uid}))
   },
 })
 
@@ -34,7 +34,7 @@ listenerMiddleware.startListening({
   matcher: isAnyOf(signIn.fulfilled),
   effect: (action, listenerApi) => {
 
-   listenerApi.dispatch(getUserFromDatabase({ userId: action.payload.uid}))
+   listenerApi.dispatch(getUserFromDatabase({ id: action.payload.uid}))
   },
 })
 

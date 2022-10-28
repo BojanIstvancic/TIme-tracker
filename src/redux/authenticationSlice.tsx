@@ -29,21 +29,12 @@ export const signOut = createAsyncThunk("authentication/signOut", async () => {
   await signOutUser(firebaseAppAuth);
 });
 
-export interface User {
-  id: string;
-  email: any;
-}
 export interface AuthenticationState {
-  user: User;
   isLogedIn: boolean;
   isLoading: boolean;
 }
 
 const initialState: AuthenticationState = {
-  user: {
-    id: "",
-    email: "",
-  },
   isLogedIn: false,
   isLoading: false,
 };
@@ -66,11 +57,7 @@ export const authenticationSlice = createSlice({
     builder.addCase(signUp.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(signUp.fulfilled, (state, action) => {
-      state.user = {
-        id: action.payload.uid,
-        email: action.payload.email,
-      };
+    builder.addCase(signUp.fulfilled, (state) => {
       state.isLogedIn = true;
       state.isLoading = false;
     });
@@ -81,11 +68,7 @@ export const authenticationSlice = createSlice({
     builder.addCase(signIn.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(signIn.fulfilled, (state, action) => {
-      state.user = {
-        id: action.payload.uid,
-        email: action.payload.email,
-      };
+    builder.addCase(signIn.fulfilled, (state) => {
       state.isLogedIn = true;
       state.isLoading = false;
     });

@@ -4,7 +4,7 @@ import { dataBase } from "../config/firebase/firebase";
 
 export const getTrackerData = createAsyncThunk(
   "trackedData/getData",
-  async ({ userId }: { userId: string }) => {
+  async ({ id }: { id: string }) => {
     const trackedDataRef = collection(dataBase, "trackedData");
 
     const trackedData = await getDocs(trackedDataRef);
@@ -13,33 +13,25 @@ export const getTrackerData = createAsyncThunk(
       .map((doc: any) => ({
         ...doc.data(),
       }))
-      .filter((doc: any) => userId === doc.userId);
+      .filter((doc: any) => id === doc.id);
   }
 );
 
 export const addTrackedDataItem = createAsyncThunk(
   "trackedData/addItem",
-  async ({
-    title,
-    userId,
-    time,
-  }: {
-    title: string;
-    userId: string;
-    time: number;
-  }) => {
+  async ({ title, id, time }: { title: string; id: string; time: number }) => {
     const trackedDataRef = collection(dataBase, "trackedData");
 
-    await addDoc(trackedDataRef, { title, userId, time });
+    await addDoc(trackedDataRef, { title, id, time });
 
-    return { time, title, userId };
+    return { time, title, id };
   }
 );
 
 export interface Data {
+  id: string;
   time: number;
   title: string;
-  userId: string;
 }
 
 export interface TrackedData {

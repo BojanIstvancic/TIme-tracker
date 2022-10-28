@@ -11,17 +11,17 @@ export interface StopWatchProps {}
 
 export interface Item {
   title: string;
-  userId: string;
+  id: string;
 }
 
 const StopWatch: React.FC<StopWatchProps> = () => {
-  const { user } = useSelector((state: RootState) => state.authentication);
+  const { user } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   const [item, setItem] = useState<Item>({
     title: "Add title here",
-    userId: user.id,
+    id: user.id,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +44,7 @@ const StopWatch: React.FC<StopWatchProps> = () => {
     dispatch(
       addTrackedDataItem({
         title: item.title,
-        userId: item.userId,
+        id: item.id,
         time,
       })
     );
