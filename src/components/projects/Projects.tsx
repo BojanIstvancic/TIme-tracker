@@ -9,13 +9,12 @@ import { Typography } from "@mui/material";
 export interface ProjectsProps {}
 
 export interface Item {
-  id: number;
+  id: string;
   title: string;
-  userId: number;
 }
 
 const Projects: React.FC<ProjectsProps> = () => {
-  const { user } = useSelector((state: RootState) => state.authentication);
+  const { user } = useSelector((state: RootState) => state.user);
   const { data, isLoading } = useSelector(
     (state: RootState) => state.trackedData
   );
@@ -23,7 +22,7 @@ const Projects: React.FC<ProjectsProps> = () => {
 
   useEffect(() => {
     if (user.id) {
-      dispatch(getTrackerData({ userId: user.id }));
+      dispatch(getTrackerData({ id: user.id }));
     }
   }, [user, dispatch]);
 
