@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { dataBase } from "../config/firebase/firebase";
-// import type { PayloadAction } from "@reduxjs/toolkit";
 
 export const getTrackerData = createAsyncThunk(
   "trackedData/getData",
