@@ -3,7 +3,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import Button from "@mui/material/Button";
-import { updateProfileInDatabase } from "../../redux/userSlice";
+import {
+  getUserFromDatabase,
+  updateProfileInDatabase,
+} from "../../redux/userSlice";
+import { useEffect } from "react";
 
 export interface SettingsProps {}
 
@@ -21,6 +25,12 @@ const Settings: React.FC<SettingsProps> = () => {
     name: user.name,
     surname: user.surname,
   });
+
+  useEffect(() => {
+    if (user.id) {
+      dispatch(getUserFromDatabase({ id: user.id }));
+    }
+  }, [user.id, dispatch]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setProfileData({ ...profileData, [event.target.name]: event.target.value });

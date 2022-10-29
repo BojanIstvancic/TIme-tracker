@@ -6,15 +6,18 @@ import {
   query,
   where,
   setDoc,
+  doc,
 } from "firebase/firestore";
 import { dataBase } from "../config/firebase/firebase";
 
 export const createUserInDatabase = createAsyncThunk(
   "user/createUserInDatabase",
   async ({ id }: { id: string }) => {
-    const usersDataRef = collection(dataBase, "users");
-
-    await addDoc(usersDataRef, { name: "", surname: "", id });
+    await setDoc(doc(dataBase, "users", id), {
+      id: id,
+      name: "",
+      surname: "",
+    });
 
     return { id };
   }
@@ -41,14 +44,11 @@ export const updateProfileInDatabase = createAsyncThunk(
     name: string;
     surname: string;
   }) => {
-    const usersCollectionRef = collection(dataBase, "users");
-    //   const userQuery = await setDoc(
-    //     query(usersCollectionRef, where("id", "==", id)),
-    //     { id, name, surname }
-    //   );
-    // }
-    // console.log(userQuery)
-    // // update specific data
+    const userRef = doc(dataBase, "users", id);
+
+    await setDoc(userRef, { id: id, name: name, surname: surname });
+
+    return { name, surname };
   }
 );
 
@@ -92,7 +92,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(getUserFromDatabase.fulfilled, (state, action) => {
       state.user = {
-        id: action.payload.id,
+        ...state.user,
         name: action.payload.name,
         surname: action.payload.surname,
       };
