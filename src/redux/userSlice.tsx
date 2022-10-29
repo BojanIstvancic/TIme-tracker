@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { dataBase } from "../config/firebase/firebase";
 
 export const createUserInDatabase = createAsyncThunk(
@@ -17,7 +17,6 @@ export const getUserFromDatabase = createAsyncThunk(
   "user/getUserFromDatabase",
   async ({ id }: { id: string }) => {
     const usersDataRef = collection(dataBase, "users");
-
     const userData = await getDocs(usersDataRef);
 
     return userData.docs
@@ -25,6 +24,28 @@ export const getUserFromDatabase = createAsyncThunk(
         ...doc.data(),
       }))
       .find((doc: any) => id === doc.id);
+  }
+);
+
+export const updateProfileInDatabase = createAsyncThunk(
+  "user/updateProfileIndatabase",
+  async ({
+    id,
+    name,
+    surname,
+  }: {
+    id: string;
+    name: string;
+    surname: string;
+  }) => {
+    // const usersDataRef = doc(dataBase, "users");
+    // const usersSnap = await getDoc(usersDataRef);
+    // if (usersSnap.exists()) {
+    //   console.log("Document data:", usersSnap.data());
+    // } else {
+    //   // doc.data() will be undefined in this case
+    //   console.log("No such document!");
+    // }
   }
 );
 
