@@ -1,19 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { dataBase } from "../config/firebase/firebase";
 
 export const getTrackerData = createAsyncThunk(
   "trackedData/getData",
   async ({ id }: { id: string }) => {
     const trackedDataRef = collection(dataBase, "trackedData");
+    const trackedData = await getDocs(
+      query(trackedDataRef, where("id", "==", id))
+    );
 
-    const trackedData = await getDocs(trackedDataRef);
-
-    return trackedData.docs
-      .map((doc: any) => ({
-        ...doc.data(),
-      }))
-      .filter((doc: any) => id === doc.id);
+    return trackedData.docs.map((doc: any) => ({
+      ...doc.data(),
+    }));
   }
 );
 
