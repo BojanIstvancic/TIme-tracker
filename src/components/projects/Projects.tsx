@@ -11,6 +11,7 @@ export interface ProjectsProps {}
 export interface Item {
   id: string;
   title: string;
+  time: number;
 }
 
 const Projects: React.FC<ProjectsProps> = () => {
@@ -57,7 +58,7 @@ const Projects: React.FC<ProjectsProps> = () => {
             </Typography>
           </Box>
           {data && data.length > 0 ? (
-            data.map((item: any, index: any) => (
+            data.map((item: Item, index: number) => (
               <Box
                 sx={{
                   display: "flex",

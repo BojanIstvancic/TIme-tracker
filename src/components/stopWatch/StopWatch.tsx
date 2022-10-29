@@ -53,12 +53,12 @@ const StopWatch: React.FC<StopWatchProps> = () => {
   return (
     <Box
       sx={{
+        height: "97px",
         display: "flex",
-        pt: 4.6,
+        alignItems: "center",
         pl: 4.6,
         pr: 4.6,
-        borderBottom: "1px solid #e0e0e0",
-        alignItems: "center",
+        borderBottom: "3px solid var(--light-gray)",
       }}
     >
       <TextField

@@ -1,13 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  query,
+  where,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 import { dataBase } from "../config/firebase/firebase";
 
 export const createUserInDatabase = createAsyncThunk(
   "user/createUserInDatabase",
   async ({ id }: { id: string }) => {
-    const usersDataRef = collection(dataBase, "users");
-
-    await addDoc(usersDataRef, { name: "", surname: "", id });
+    await setDoc(doc(dataBase, "users", id), {
+      id: id,
+      name: "",
+      surname: "",
+    });
 
     return { id };
   }
@@ -17,14 +27,28 @@ export const getUserFromDatabase = createAsyncThunk(
   "user/getUserFromDatabase",
   async ({ id }: { id: string }) => {
     const usersDataRef = collection(dataBase, "users");
+    const userQuery = await getDocs(query(usersDataRef, where("id", "==", id)));
 
-    const userData = await getDocs(usersDataRef);
+    return userQuery.docs[0].data();
+  }
+);
 
-    return userData.docs
-      .map((doc: any) => ({
-        ...doc.data(),
-      }))
-      .find((doc: any) => id === doc.id);
+export const updateProfileInDatabase = createAsyncThunk(
+  "user/updateProfileIndatabase",
+  async ({
+    id,
+    name,
+    surname,
+  }: {
+    id: string;
+    name: string;
+    surname: string;
+  }) => {
+    const userRef = doc(dataBase, "users", id);
+
+    await setDoc(userRef, { id: id, name: name, surname: surname });
+
+    return { name, surname };
   }
 );
 
@@ -68,7 +92,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(getUserFromDatabase.fulfilled, (state, action) => {
       state.user = {
-        id: action.payload.id,
+        ...state.user,
         name: action.payload.name,
         surname: action.payload.surname,
       };
