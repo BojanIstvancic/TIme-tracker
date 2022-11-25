@@ -20,8 +20,7 @@ export const addTrackedDataItem = createAsyncThunk(
   "trackedData/addItem",
   async ({ title, id, time }: { title: string; id: string; time: number }) => {
     const trackedDataRef = collection(dataBase, "trackedData");
-
-    await addDoc(trackedDataRef, { title, id, time });
+    addDoc(trackedDataRef, { title, id, time });
 
     return { time, title, id };
   }
