@@ -1,4 +1,5 @@
 import { RouteComponentProps } from "react-router-dom";
+
 const error404: React.FC<RouteComponentProps> = () => {
   return (
     <>

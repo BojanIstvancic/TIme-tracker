@@ -8,11 +8,11 @@ import { useDispatch } from "react-redux";
 import { signUp, signIn } from "../../redux/authenticationSlice";
 import { AppDispatch } from "../../redux/store";
 
-export interface FormProps {
+interface FormProps {
   history: History;
 }
 
-export interface User {
+interface User {
   email: string;
   password: string;
 }

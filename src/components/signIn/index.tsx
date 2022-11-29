@@ -1,7 +1,7 @@
-import { blue } from "@mui/material/colors";
 import { RouteComponentProps } from "react-router-dom";
-import Form from "../Form";
 import { SignInStyledWrapper } from "./signIn.style";
+import Form from "../Form";
+import { blue } from "@mui/material/colors";
 import { Typography } from "@mui/material";
 
 const SignIn: React.FC<RouteComponentProps> = ({ history }) => {

@@ -6,15 +6,13 @@ import { getTrackerData } from "../../redux/trackedDataSlice";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Typography } from "@mui/material";
 
-export interface ProjectsProps {}
-
-export interface Item {
+interface Item {
   id: string;
   title: string;
   time: number;
 }
 
-const Projects: React.FC<ProjectsProps> = () => {
+const Projects: React.FC<{}> = () => {
   const { user } = useSelector((state: RootState) => state.user);
   const { data, isLoading } = useSelector(
     (state: RootState) => state.trackedData
