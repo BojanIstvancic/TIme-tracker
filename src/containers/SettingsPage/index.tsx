@@ -1,8 +1,6 @@
 import Settings from "../../components/settings/Settings";
 
-export interface SettingsPageProps {}
-
-const SettingsPage: React.FC<SettingsPageProps> = () => {
+const SettingsPage: React.FC<{}> = () => {
   return (
     <>
       <Settings />

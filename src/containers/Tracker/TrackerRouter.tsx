@@ -2,9 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import SettingsPage from "../SettingsPage";
 import TrackerPage from "../TrackerPage";
 
-export interface TrackerRouterProps {}
-
-const TrackerRouter: React.FC<TrackerRouterProps> = () => {
+const TrackerRouter: React.FC<{}> = () => {
   return (
     <Switch>
       <Route exact path="/tracker" component={TrackerPage} />

@@ -9,7 +9,7 @@ import error404 from "./components/errors/404";
 import SignIn from "./components/signIn/SignIn";
 import SignUp from "./components/signUp/SignUp";
 
-import Tracker from "./containers/Tracker/Tracker";
+import Tracker from "./containers/Tracker";
 import links from "./helpers/links";
 
 const ProtectedRoute = ({

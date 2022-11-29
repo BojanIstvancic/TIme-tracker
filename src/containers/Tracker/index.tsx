@@ -1,9 +1,7 @@
 import MainLayout from "../../components/mainLayout/MainLayout";
 import TrackerRouter from "./TrackerRouter";
 
-export interface TrackerProps {}
-
-const Tracker: React.FC<TrackerProps> = () => {
+const Tracker: React.FC<{}> = () => {
   return (
     <MainLayout>
       <TrackerRouter />
