@@ -9,15 +9,13 @@ import {
 } from "../../redux/userSlice";
 import { useEffect } from "react";
 
-export interface SettingsProps {}
-
-export interface ProfileData {
+interface ProfileData {
   id: string;
   name: string;
   surname: string;
 }
 
-const Settings: React.FC<SettingsProps> = () => {
+const Settings: React.FC<{}> = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { user } = useSelector((state: RootState) => state.user);
   const [profileData, setProfileData] = useState<ProfileData>({

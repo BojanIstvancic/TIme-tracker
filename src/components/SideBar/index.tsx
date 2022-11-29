@@ -16,9 +16,7 @@ import { signOut } from "../../redux/authenticationSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 
-interface SideBarProps extends RouteComponentProps {}
-
-const SideBar: React.FunctionComponent<SideBarProps> = ({ history }) => {
+const SideBar: React.FC<RouteComponentProps> = ({ history }) => {
   const dispatch = useDispatch<AppDispatch>();
   const currentRoute = history.location.pathname;
 

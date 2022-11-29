@@ -1,11 +1,11 @@
 import { Box } from "@mui/system";
-import SideBar from "../sidebar/SideBar";
+import SideBar from "../SideBar";
 
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
-const MainLayout: React.FunctionComponent<MainLayoutProps> = ({ children }) => {
+const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <>
       <SideBar />

@@ -7,14 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { addTrackedDataItem } from "../../redux/trackedDataSlice";
 
-export interface StopWatchProps {}
-
-export interface Item {
+interface Item {
   title: string;
   id: string;
 }
 
-const StopWatch: React.FC<StopWatchProps> = () => {
+const StopWatch: React.FC<{}> = () => {
   const { user } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch<AppDispatch>();
   const [time, setTime] = useState(0);
