@@ -5,9 +5,9 @@ import {
   Route,
   BrowserRouter as Router,
 } from "react-router-dom";
-import error404 from "./components/errors/404";
-import SignIn from "./components/signIn/SignIn";
-import SignUp from "./components/signUp/SignUp";
+import error404 from "./components/Errors/404";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
 
 import Tracker from "./containers/Tracker";
 import links from "./helpers/links";

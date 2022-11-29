@@ -1,4 +1,4 @@
-import Settings from "../../components/settings/Settings";
+import Settings from "../../components/Settings";
 
 const SettingsPage: React.FC<{}> = () => {
   return (

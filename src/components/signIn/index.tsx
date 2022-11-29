@@ -1,6 +1,6 @@
 import { blue } from "@mui/material/colors";
 import { RouteComponentProps } from "react-router-dom";
-import Form from "../form/Form";
+import Form from "../Form";
 import { SignInStyledWrapper } from "./signIn.style";
 import { Typography } from "@mui/material";
 

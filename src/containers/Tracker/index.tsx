@@ -1,4 +1,4 @@
-import MainLayout from "../../components/mainLayout/MainLayout";
+import MainLayout from "../../components/MainLayout";
 import TrackerRouter from "./TrackerRouter";
 
 const Tracker: React.FC<{}> = () => {

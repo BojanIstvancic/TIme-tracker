@@ -1,4 +1,4 @@
-import { LayoutWrapper } from "./components/layout/layoutStyled";
+import { LayoutWrapper } from "./components/Layout/layoutStyled";
 import GlobalStyle from "./config/style/style";
 import PublicRoutes from "./router";
 import { Provider } from "react-redux";
