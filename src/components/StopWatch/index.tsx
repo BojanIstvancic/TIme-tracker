@@ -8,8 +8,8 @@ import { AppDispatch, RootState } from "../../redux/store";
 import { addTrackedDataItem } from "../../redux/trackedDataSlice";
 
 interface Item {
-  title: string;
   id: string;
+  title: string;
 }
 
 const StopWatch: React.FC<{}> = () => {
@@ -18,8 +18,8 @@ const StopWatch: React.FC<{}> = () => {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   const [item, setItem] = useState<Item>({
-    title: "Add title here",
     id: user.id,
+    title: "Add title here",
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

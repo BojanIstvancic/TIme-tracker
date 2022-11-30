@@ -5,7 +5,7 @@ import { AppDispatch, RootState } from "../../redux/store";
 import Button from "@mui/material/Button";
 import {
   getUserFromDatabase,
-  updateProfileInDatabase,
+  updateUserInDatabase,
 } from "../../redux/userSlice";
 import { useEffect } from "react";
 
@@ -36,7 +36,7 @@ const Settings: React.FC<{}> = () => {
 
   const handleUpdateProfile = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    dispatch(updateProfileInDatabase(profileData));
+    dispatch(updateUserInDatabase(profileData));
   };
 
   return (
