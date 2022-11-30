@@ -17,13 +17,14 @@ export const getTrackerData = createAsyncThunk(
   "trackedData/getData",
   async ({ id }: { id: string }) => {
     const trackedDataRef = collection(dataBase, "trackedData");
-    const trackedData = await getDocs(
-      query(trackedDataRef, where("id", "==", id))
+    const trackedDataQuery = query(trackedDataRef, where("id", "==", id));
+    const trackedDataSnapshot = await getDocs(trackedDataQuery);
+
+    const trackedData: Item[] = trackedDataSnapshot.docs.map((document: any) =>
+      Object.assign({}, document.data())
     );
 
-    return trackedData.docs.map((document: any) => ({
-      ...document.data(),
-    }));
+    return trackedData;
   }
 );
 
@@ -31,9 +32,11 @@ export const addTrackedDataItem = createAsyncThunk(
   "trackedData/addItem",
   async ({ id, title, time }: Item) => {
     const trackedDataRef = collection(dataBase, "trackedData");
-    addDoc(trackedDataRef, { id, title, time });
+    const item: Item = { id, title, time };
 
-    return { id, title, time };
+    addDoc(trackedDataRef, item);
+
+    return item;
   }
 );
 
@@ -51,7 +54,7 @@ export const trackedDataSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getTrackerData.fulfilled, (state, action) => {
-      state.data = [...action.payload];
+      state.data = action.payload.slice();
       state.isLoading = false;
     });
     builder.addCase(getTrackerData.rejected, (state) => {
