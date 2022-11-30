@@ -2,6 +2,17 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { dataBase } from "../config/firebase/firebase";
 
+interface Item {
+  id: string;
+  time: number;
+  title: string;
+}
+
+interface TrackedData {
+  data: Item[] | null;
+  isLoading: boolean;
+}
+
 export const getTrackerData = createAsyncThunk(
   "trackedData/getData",
   async ({ id }: { id: string }) => {
@@ -10,32 +21,21 @@ export const getTrackerData = createAsyncThunk(
       query(trackedDataRef, where("id", "==", id))
     );
 
-    return trackedData.docs.map((doc: any) => ({
-      ...doc.data(),
+    return trackedData.docs.map((document: any) => ({
+      ...document.data(),
     }));
   }
 );
 
 export const addTrackedDataItem = createAsyncThunk(
   "trackedData/addItem",
-  async ({ title, id, time }: { title: string; id: string; time: number }) => {
+  async ({ id, title, time }: Item) => {
     const trackedDataRef = collection(dataBase, "trackedData");
-    addDoc(trackedDataRef, { title, id, time });
+    addDoc(trackedDataRef, { id, title, time });
 
-    return { time, title, id };
+    return { id, title, time };
   }
 );
-
-export interface Data {
-  id: string;
-  time: number;
-  title: string;
-}
-
-export interface TrackedData {
-  data: Data[] | null;
-  isLoading: boolean;
-}
 
 const initialState: TrackedData = {
   data: null,

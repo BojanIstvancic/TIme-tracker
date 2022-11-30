@@ -45,8 +45,8 @@ const StopWatch: React.FC<{}> = () => {
   const saveData = () => {
     dispatch(
       addTrackedDataItem({
-        title: item.title,
         id: item.id,
+        title: item.title,
         time,
       })
     );
