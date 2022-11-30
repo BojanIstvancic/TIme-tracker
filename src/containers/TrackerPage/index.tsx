@@ -1,5 +1,5 @@
-import Projects from "../../components/Projects";
 import StopWatch from "../../components/StopWatch";
+import Projects from "../../components/Projects";
 
 const TrackerPage: React.FC<{}> = () => {
   return (

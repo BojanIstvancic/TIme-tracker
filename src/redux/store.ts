@@ -1,9 +1,9 @@
-import { configureStore, combineReducers, createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit'
+import storage from 'redux-persist/lib/storage';
+import { configureStore, combineReducers, createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
 import authenticationReducer, {  signIn, signUp } from './authenticationSlice';
 import trackedDataReducer from './trackedDataSlice';
 import userReducer, { createUserInDatabase, getUserFromDatabase } from './userSlice';
-import {persistStore, persistReducer} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { persistStore, persistReducer } from 'redux-persist';
 
 const persistConfig = {
   key:"root",
