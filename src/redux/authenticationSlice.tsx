@@ -20,6 +20,7 @@ export const signIn = createAsyncThunk(
   "authentication/signIn",
   async ({ email, password }: { email: string; password: string }) => {
     const user = await signInUser(firebaseAppAuth, email, password);
+
     return user.user;
   }
 );
