@@ -23,7 +23,11 @@ const StopWatch: React.FC<{}> = () => {
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setItem({ ...item, [event.target.name]: event.target.value });
+    const itemWithUpdatedValue: Item = Object.assign({}, item, {
+      [event.target.name]: event.target.value,
+    });
+
+    setItem(itemWithUpdatedValue);
   };
 
   useEffect(() => {

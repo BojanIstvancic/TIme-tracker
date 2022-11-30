@@ -12,7 +12,7 @@ interface FormProps {
   history: History;
 }
 
-interface User {
+interface FormFields {
   email: string;
   password: string;
 }
@@ -20,23 +20,35 @@ interface User {
 const Form: React.FC<FormProps> = ({ history }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [user, setUser] = useState<User>({
+  const [formFields, setFormFields] = useState<FormFields>({
     email: "Add email address",
     password: "Add password",
   });
 
   const handleSignUp = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    dispatch(signUp({ email: user.email, password: user.password }));
+    dispatch(
+      signUp({ email: formFields.email, password: formFields.password })
+    );
   };
 
   const handleSignIn = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    dispatch(signIn({ email: user.email, password: user.password }));
+    dispatch(
+      signIn({ email: formFields.email, password: formFields.password })
+    );
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [event.target.name]: event.target.value });
+    const formFieldsWithUpdatedValue: FormFields = Object.assign(
+      {},
+      formFields,
+      {
+        [event.target.name]: event.target.value,
+      }
+    );
+
+    setFormFields(formFieldsWithUpdatedValue);
   };
 
   const { pathname } = history.location;
@@ -52,10 +64,10 @@ const Form: React.FC<FormProps> = ({ history }) => {
             label="Email"
             name="email"
             fullWidth
-            value={user.email}
-            error={user.email === ""}
+            value={formFields.email}
+            error={formFields.email === ""}
             helperText={
-              user.email === ""
+              formFields.email === ""
                 ? "This field is required"
                 : "Please enter a email"
             }
@@ -69,10 +81,10 @@ const Form: React.FC<FormProps> = ({ history }) => {
             name="password"
             type={"password"}
             fullWidth
-            value={user.password}
-            error={user.password === ""}
+            value={formFields.password}
+            error={formFields.password === ""}
             helperText={
-              user.password === ""
+              formFields.password === ""
                 ? "This field is required"
                 : "Please enter a password"
             }
@@ -83,7 +95,7 @@ const Form: React.FC<FormProps> = ({ history }) => {
           <Button
             variant="contained"
             onClick={handleSignUp}
-            disabled={user.email === "" || user.password === ""}
+            disabled={formFields.email === "" || formFields.password === ""}
             fullWidth
           >
             Sign Up
@@ -93,7 +105,7 @@ const Form: React.FC<FormProps> = ({ history }) => {
             <Button
               variant="contained"
               onClick={handleSignIn}
-              disabled={user.email === "" || user.password === ""}
+              disabled={formFields.email === "" || formFields.password === ""}
               fullWidth
               sx={{ mb: 2 }}
             >
