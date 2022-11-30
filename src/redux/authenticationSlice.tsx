@@ -42,17 +42,7 @@ const initialState: AuthenticationState = {
 export const authenticationSlice = createSlice({
   name: "authentication",
   initialState,
-  reducers: {
-    // increment: (state) => {
-    //   state.value += 1;
-    // },
-    // decrement: (state) => {
-    //   state.value -= 1;
-    // },
-    // incrementByAmount: (state, action: PayloadAction<number>) => {
-    //   state.value += action.payload;
-    // },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(signUp.pending, (state) => {
       state.isLoading = true;
@@ -88,7 +78,5 @@ export const authenticationSlice = createSlice({
     });
   },
 });
-
-// export const { increment } = authenticationSlice.actions;
 
 export default authenticationSlice.reducer;

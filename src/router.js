@@ -5,12 +5,13 @@ import {
   Route,
   BrowserRouter as Router,
 } from "react-router-dom";
+
 import error404 from "./components/Errors/404";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-
 import Tracker from "./containers/Tracker";
-import links from "./helpers/links";
+
+import { links } from "./constants/index";
 
 const ProtectedRoute = ({
   component: Component,

@@ -1,6 +1,6 @@
 import { Switch, Route } from "react-router-dom";
-import SettingsPage from "../SettingsPage";
 import TrackerPage from "../TrackerPage";
+import SettingsPage from "../SettingsPage";
 
 const TrackerRouter: React.FC<{}> = () => {
   return (

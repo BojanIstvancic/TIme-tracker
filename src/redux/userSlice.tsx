@@ -9,6 +9,16 @@ import {
 } from "firebase/firestore";
 import { dataBase } from "../config/firebase/firebase";
 
+interface User {
+  id: string;
+  name: string;
+  surname: string;
+}
+interface AuthenticationState {
+  user: User;
+  isLoading: boolean;
+}
+
 export const createUserInDatabase = createAsyncThunk(
   "user/createUserInDatabase",
   async ({ id }: { id: string }) => {
@@ -26,40 +36,26 @@ export const getUserFromDatabase = createAsyncThunk(
   "user/getUserFromDatabase",
   async ({ id }: { id: string }) => {
     const usersDataRef = collection(dataBase, "users");
-    const userQuery = await getDocs(query(usersDataRef, where("id", "==", id)));
+    const userDataQuery = query(usersDataRef, where("id", "==", id));
+    const userDataSnapshot = await getDocs(userDataQuery);
 
-    return userQuery.docs[0].data();
+    const userData = userDataSnapshot.docs[0].data();
+
+    return userData;
   }
 );
 
-export const updateProfileInDatabase = createAsyncThunk(
-  "user/updateProfileIndatabase",
-  async ({
-    id,
-    name,
-    surname,
-  }: {
-    id: string;
-    name: string;
-    surname: string;
-  }) => {
+export const updateUserInDatabase = createAsyncThunk(
+  "user/updateUserInDatabase",
+  async ({ id, name, surname }: User) => {
     const userRef = doc(dataBase, "users", id);
+    const userData: User = { id: id, name: name, surname: surname };
 
-    await setDoc(userRef, { id: id, name: name, surname: surname });
+    await setDoc(userRef, userData);
 
-    return { name, surname };
+    return userData;
   }
 );
-
-export interface User {
-  id: string;
-  name: string;
-  surname: string;
-}
-export interface AuthenticationState {
-  user: User;
-  isLoading: boolean;
-}
 
 const initialState: AuthenticationState = {
   user: {
@@ -79,7 +75,7 @@ export const userSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(createUserInDatabase.fulfilled, (state, action) => {
-      state.user = { ...state.user, id: action.payload.id };
+      state.user = Object.assign({}, state.user, { id: action.payload.id });
       state.isLoading = false;
     });
     builder.addCase(createUserInDatabase.rejected, (state) => {
@@ -90,14 +86,31 @@ export const userSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getUserFromDatabase.fulfilled, (state, action) => {
-      state.user = {
-        ...state.user,
-        name: action.payload.name,
-        surname: action.payload.surname,
-      };
+      state.user = Object.assign(
+        {},
+        {
+          id: action.payload.id,
+          name: action.payload.name,
+          surname: action.payload.surname,
+        }
+      );
       state.isLoading = false;
     });
     builder.addCase(getUserFromDatabase.rejected, (state) => {
+      state.isLoading = false;
+    });
+
+    builder.addCase(updateUserInDatabase.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateUserInDatabase.fulfilled, (state, action) => {
+      state.user = Object.assign({}, state.user, {
+        name: action.payload.name,
+        surname: action.payload.surname,
+      });
+      state.isLoading = false;
+    });
+    builder.addCase(updateUserInDatabase.rejected, (state) => {
       state.isLoading = false;
     });
   },

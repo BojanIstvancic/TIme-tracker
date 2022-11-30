@@ -1,9 +1,9 @@
-import { LayoutWrapper } from "./components/Layout/layoutStyled";
 import GlobalStyle from "./config/style/style";
-import PublicRoutes from "./router";
 import { Provider } from "react-redux";
-import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./redux/store";
+import PublicRoutes from "./router";
+import { LayoutWrapper } from "./components/Layout/layoutStyled";
 
 const App: React.FC<{}> = () => {
   return (

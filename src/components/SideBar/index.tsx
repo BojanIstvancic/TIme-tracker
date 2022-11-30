@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import AccessTimeFilledSharpIcon from "@mui/icons-material/AccessTimeFilledSharp";
 import { withRouter } from "react-router";
-import links from "../../helpers/links";
+import { links } from "../../constants/index";
 import { RouteComponentProps } from "react-router-dom";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ExitToAppSharpIcon from "@mui/icons-material/ExitToAppSharp";
