@@ -40,6 +40,7 @@ export const getUserFromDatabase = createAsyncThunk(
     const userDataSnapshot = await getDocs(userDataQuery);
 
     const userData = userDataSnapshot.docs[0].data();
+
     return userData;
   }
 );
@@ -85,10 +86,14 @@ export const userSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getUserFromDatabase.fulfilled, (state, action) => {
-      state.user = Object.assign({}, state.user, {
-        name: action.payload.name,
-        surname: action.payload.surname,
-      });
+      state.user = Object.assign(
+        {},
+        {
+          id: action.payload.id,
+          name: action.payload.name,
+          surname: action.payload.surname,
+        }
+      );
       state.isLoading = false;
     });
     builder.addCase(getUserFromDatabase.rejected, (state) => {
