@@ -1,4 +1,4 @@
-const links = {
+export const links = {
   tracker: {
     url: `/tracker`,
     pattern: `/tracker`,
@@ -16,5 +16,3 @@ const links = {
     pattern: `/sign-up`,
   },
 };
-
-export default links;
